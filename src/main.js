@@ -10,6 +10,7 @@ import Aura from '@primevue/themes/aura';
 
 //PrimeFlex
 import 'primeflex/primeflex.css';
+import VueRecaptcha from 'vue-recaptcha'
 
 
 // PrimeIcons
@@ -120,6 +121,8 @@ app.component('pv-button', Button)
     .component('pv-panel', Panel)
     .component('pv-calendar', Calendar)
     .component('pv-skeleton', skeleton)
-    .component('pv-message', message);
+    .component('pv-message', message)
+    .component('VueRecaptcha', VueRecaptcha);
+
 
 app.mount('#app')

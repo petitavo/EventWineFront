@@ -1,26 +1,46 @@
 <script>
-import {SignInRequest} from "../model/sign-in.request.js";
-import {useAuthenticationStore} from "../services/authentication.store.js";
+import { SignInRequest } from "../model/sign-in.request.js";
+import { useAuthenticationStore } from "../services/authentication.store.js";
 import ToolbarHome from "../../public/component/toolbar-home.component.vue";
+import RecaptchaCheckbox from "../../shared/components/RecaptchaCheckbox.vue";
 
 export default {
   name: 'sign-in',
-  components: {ToolbarHome},
+  components: {
+    ToolbarHome,
+    RecaptchaCheckbox
+  },
   data() {
     return {
       username: '',
-      password: ''
+      password: '',
+      recaptchaToken: null
     };
   },
   methods: {
     onSignIn() {
+      if (!this.username || !this.password) {
+        alert('Username and password are required.');
+        return;
+      }
+
+      if (!this.recaptchaToken) {
+        alert('Please complete the reCAPTCHA.');
+        return;
+      }
+
       let authenticationStore = useAuthenticationStore();
       let signInRequest = new SignInRequest(this.username, this.password);
       authenticationStore.signIn(signInRequest, this.$router);
+    },
+    onCaptchaVerified(token) {
+      this.recaptchaToken = token;
+    },
+    onCaptchaExpired() {
+      this.recaptchaToken = null;
     }
   }
 }
-
 </script>
 
 <template>
@@ -46,6 +66,13 @@ export default {
             <small v-if="!password" class="p-invalid">Password is required.</small>
           </pv-float-label>
         </div>
+
+        <!-- 🔐 reCAPTCHA personalizado -->
+        <recaptcha-checkbox
+            @verified="onCaptchaVerified"
+            @expired="onCaptchaExpired"
+        />
+
         <div class="p-field mt-5">
           <pv-button type="submit">Sign In</pv-button>
           <router-link to="/home">
@@ -55,12 +82,10 @@ export default {
       </div>
     </form>
   </div>
-
 </template>
 
 <style scoped>
 .ml-2 {
   margin-left: 0.5rem;
 }
-
 </style>
