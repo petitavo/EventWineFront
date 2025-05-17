@@ -16,7 +16,6 @@ export default {
       visible: false,
       items: [
         { label: "title-home-option", to: "/vinicultor/home", icon: 'pi pi-home' },
-        { label: "title-inventory-option", to: "/vinicultor/inventory", icon: 'pi pi-receipt' },
         { label: "title-winemaking-option", to: '/vinicultor/winemaking-process/batches', icon: 'pi pi-spinner-dotted' },
       ]
     }
