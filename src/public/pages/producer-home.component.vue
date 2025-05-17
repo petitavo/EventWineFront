@@ -5,9 +5,6 @@ export default {
   name: "home-content",
   components: {HeaderContent},
   methods: {
-    goToInventory() {
-      this.$router.push('/vinicultor/inventory');
-    },
     goToProcess() {
       this.$router.push('/vinicultor/winemaking-process/batches');
     }
@@ -19,15 +16,7 @@ export default {
   <header-content></header-content>
   <div class="home-container">
     <h1 class="title">Welcome to Elixir Control</h1>
-    <p class="subtitle">Manage your wine production and inventory with ease.</p>
-
     <div class="button-group">
-      <pv-button
-          label="Go to Inventory"
-          icon="pi pi-box"
-          class="p-button-primary"
-          @click="goToInventory"
-      />
       <pv-button
           label="Go to Winemaking"
           icon="pi pi-cog"

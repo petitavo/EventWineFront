@@ -6,13 +6,10 @@ import BottlingManagementComponent from "../elixir-control/winemaking-process/pa
 import ClarificationManagementComponent from "../elixir-control/winemaking-process/pages/clarification-management.component.vue";
 import PressingManagementComponent from "../elixir-control/winemaking-process/pages/pressing-management.component.vue";
 import WinemakingProcessManagementComponent from "../elixir-control/winemaking-process/pages/winemaking-process-management.component.vue";
-import InventoryManagementComponent from "../elixir-control/inventory-management/pages/inventory-management.vue";
-import InventoryDetailComponent from "../elixir-control/inventory-management/pages/inventory-details.vue";
 import ProducerHomeComponent from "../public/pages/producer-home.component.vue";
 import HomeContentComponent from "../public/pages/home-content.component.vue";
 import SignInComponent from "../iam/pages/sign-in.component.vue";
 import SignUpComponent from "../iam/pages/sign-up.component.vue";
-import InventoryDetails from "../elixir-control/inventory-management/pages/inventory-details.vue";
 import PageNotFoundComponent from "../public/pages/page-not-found.component.vue";
 
 import {authenticationGuard} from "../iam/services/authentication.guard.js";
@@ -39,12 +36,10 @@ const router = createRouter({
         {path: '/vinicultor/winemaking-process',               name: 'Winemaking-Process',  component: WinemakingProcessManagementComponent,meta: { title: 'Winemaking Process'}},
 
         /*=========================== Inventory Management Routes ===========================*/
-        {path: '/vinicultor/inventory',                        name: 'Inventory-Management',component: InventoryManagementComponent,        meta: { title: 'Inventory Management' }},
 
         {
             path: '/vinicultor/inventory/:id/details',
             name: 'InventoryDetails',
-            component: InventoryDetails,
             props: true,
             meta: { title: 'Inventory Item Details' }
         },

@@ -3,7 +3,7 @@ import CreateAndEdit from "../../../shared/components/create-and-edit.component.
 
 export default {
   name: "clarification-create-and-edit",
-  components: {CreateAndEdit},
+  components: { CreateAndEdit },
 
   props: {
     item: null,
@@ -12,12 +12,19 @@ export default {
 
   data() {
     return {
-      submitted: false
-    }
+      submitted: false,
+      clarificationMethods: [
+        { label: "Bentonite", value: "Bentonite" },
+        { label: "Cold Stabilization", value: "Cold Stabilization" },
+        { label: "Centrifugation", value: "Centrifugation" },
+        { label: "Gelatin", value: "Gelatin" },
+        { label: "Kieselsol", value: "Kieselsol" },
+        { label: "Egg white", value: "Egg white" }
+      ]
+    };
   },
 
   methods: {
-
     onCancelRequested() {
       this.$emit('cancel-requested-clarification');
     },
@@ -31,13 +38,10 @@ export default {
   created() {
     console.log('Clarification Create and Edit Dialog component created');
   }
-
-
-}
+};
 </script>
 
 <template>
-
   <div class="p-fluid">
     <create-and-edit :entity="item" :visible="visible" entity-name="Clarification"
                      @canceled-shared="onCancelRequested" @saved-shared="onSaveRequested">
@@ -46,47 +50,66 @@ export default {
 
         <pv-float-label class="mt-5">
           <label for="batch_id">Batch ID</label>
-          <pv-input-text id="batch_id" v-model="item.batchId" :class="{ 'p-invalid': submitted && !item.batchId}"/>
+          <pv-input-text id="batch_id" v-model="item.batchId"
+                         :class="{ 'p-invalid': submitted && !item.batchId }" />
         </pv-float-label>
 
         <pv-float-label class="mt-5">
           <label for="products_used">Products used</label>
-          <pv-input-text id="products_used" v-model="item.productsUsed" :class="{ 'p-invalid': submitted && !item.productsUsed}"/>
+          <pv-input-text id="products_used" v-model="item.productsUsed"
+                         :class="{ 'p-invalid': submitted && !item.productsUsed }" />
         </pv-float-label>
 
-        <pv-float-label class="mt-5">
-          <label for="clarification_method">Clarification method</label>
-          <pv-input-text id="clarification_method" v-model="item.clarificationMethod" :class="{ 'p-invalid': submitted && !item.clarificationMethod}"/>
-        </pv-float-label>
+        <div class="mt-5">
+          <label for="clarification_method" class="block text-sm mb-1">Clarification method</label>
+          <pv-dropdown id="clarification_method"
+                       v-model="item.clarificationMethod"
+                       :options="clarificationMethods"
+                       option-label="label"
+                       option-value="value"
+                       placeholder="Select clarification method"
+                       class="w-full"
+                       :class="{ 'p-invalid': submitted && !item.clarificationMethod }" />
+        </div>
 
-        <pv-float-label class="mt-5">
-          <label for="filtration_date">Filtration date</label>
-          <pv-input-text id="filtration_date" v-model="item.filtrationDate" :class="{ 'p-invalid': submitted && !item.filtrationDate}"/>
-        </pv-float-label>
+        <div class="mt-5">
+          <label for="filtration_date" class="block text-sm mb-1">Filtration date</label>
+          <pv-calendar id="filtration_date"
+                       v-model="item.filtrationDate"
+                       date-format="yy-mm-dd"
+                       class="w-full"
+                       :class="{ 'p-invalid': submitted && !item.filtrationDate }" />
+        </div>
 
         <pv-float-label class="mt-5">
           <label for="clarity_level">Clarity level</label>
-          <pv-input-text id="clarity_level" v-model="item.clarityLevel" :class="{ 'p-invalid': submitted && !item.clarityLevel}"/>
+          <pv-input-text id="clarity_level" v-model="item.clarityLevel"
+                         :class="{ 'p-invalid': submitted && !item.clarityLevel }" />
         </pv-float-label>
 
-        <pv-float-label class="mt-5">
-          <label for="start_date">Start date</label>
-          <pv-input-text id="start_date" v-model="item.startDate" :class="{ 'p-invalid': submitted && !item.startDate}"/>
-        </pv-float-label>
+        <div class="mt-5">
+          <label for="start_date" class="block text-sm mb-1">Start date</label>
+          <pv-calendar id="start_date"
+                       v-model="item.startDate"
+                       date-format="yy-mm-dd"
+                       class="w-full"
+                       :class="{ 'p-invalid': submitted && !item.startDate }" />
+        </div>
 
-        <pv-float-label class="mt-5">
-          <label for="end_date">End date</label>
-          <pv-input-text id="end_date" v-model="item.endDate" :class="{ 'p-invalid': submitted && !item.endDate}"/>
-        </pv-float-label>
+        <div class="mt-5">
+          <label for="end_date" class="block text-sm mb-1">End date</label>
+          <pv-calendar id="end_date"
+                       v-model="item.endDate"
+                       date-format="yy-mm-dd"
+                       class="w-full"
+                       :class="{ 'p-invalid': submitted && !item.endDate }" />
+        </div>
 
       </template>
 
     </create-and-edit>
   </div>
-
-
 </template>
 
 <style scoped>
-
 </style>
